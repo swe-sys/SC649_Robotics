@@ -53,7 +53,8 @@ def Trilateration_info(data):
 def programflow():
 
 	rospy.init_node('Robot_Position_Finder')
-	rospy.Subscriber('/trilateration_data',Trilateration,Trilateration_info)
+	#rospy.Subscriber('/trilateration_data',Trilateration,Trilateration_info)
+	rospy.Subscriber('/measurement_data',Trilateration,Trilateration_info)
 
 	rate = rospy.Rate(10) #10 Hz
 
@@ -81,8 +82,8 @@ def programflow():
 		PosePublisher = rospy.Publisher('/robot_pose',Robot_Position,queue_size=5)
 		PosePublisher.publish(Robot_Pose_msg)
 
-		# rospy.loginfo("Position_x: {:.2f}".format(Robot_Position_x))
-		# rospy.loginfo("Position_y: {:.2f}".format(Robot_Position_y))
+		rospy.loginfo("Position_x: {:.2f}".format(Robot_Position_x))
+		rospy.loginfo("Position_y: {:.2f}".format(Robot_Position_y))
 
 		rate.sleep()
 
